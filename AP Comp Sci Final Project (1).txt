@@ -1,0 +1,235 @@
+﻿public class Patient {
+    private String bloodtype;
+  
+    public Patient(String bloodgroup) 
+        {
+
+
+            bloodtype = bloodgroup.toUpperCase();
+
+
+        }       
+        
+    public boolean canDonateBloodTo(Patient receiver) {
+      boolean candonate = false;
+      if (this.bloodtype.equals("A+")) {
+        if(receiver.bloodtype.equals("A+") || receiver.bloodtype.equals("AB+")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      else if (this.bloodtype.equals("A-")) {
+        if(receiver.bloodtype.equals("A+") || receiver.bloodtype.equals("A-") || receiver.bloodtype.equals("AB+") || receiver.bloodtype.equals("AB-")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      else if (this.bloodtype.equals("O+")) {
+        if(receiver.bloodtype.equals("O+") || receiver.bloodtype.equals("A+") || receiver.bloodtype.equals("B+") || receiver.bloodtype.equals("AB+")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      else if (this.bloodtype.equals("O-")) {
+        candonate = true;
+      }
+      else if (this.bloodtype.equals("B+")) {
+        if(receiver.bloodtype.equals("B+") || receiver.bloodtype.equals("AB+")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      else if (this.bloodtype.equals("B-")) {
+        if(receiver.bloodtype.equals("B+") || receiver.bloodtype.equals("B-") || receiver.bloodtype.equals("AB+") || receiver.bloodtype.equals("AB-")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      else if (this.bloodtype.equals("AB+")) {
+        if(receiver.bloodtype.equals("AB+")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      else if (this.bloodtype.equals("AB-")) {
+        if(receiver.bloodtype.equals("AB+") || receiver.bloodtype.equals("AB-")) {
+          candonate = true;
+        }
+        else {
+          candonate = false;
+        }
+      }
+      
+      
+      else {
+        candonate = false;
+      }
+      
+      return candonate;
+
+
+    }
+    
+    
+    
+    public boolean canReceiveBloodFrom(Patient donor) {
+      boolean canreceive = false;
+      if (this.bloodtype.equals("A+")) {
+        if(donor.bloodtype.equals("A+") || donor.bloodtype.equals("A-") || donor.bloodtype.equals("O+") || donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      else if (this.bloodtype.equals("A-")) {
+        if(donor.bloodtype.equals("A-") || donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      else if (this.bloodtype.equals("O+")) {
+        if(donor.bloodtype.equals("O+") || donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      else if (this.bloodtype.equals("O-")) {
+        if(donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      else if (this.bloodtype.equals("B+")) {
+        if(donor.bloodtype.equals("B+") || donor.bloodtype.equals("B-") || donor.bloodtype.equals("O+") || donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      else if (this.bloodtype.equals("B-")) {
+        if(donor.bloodtype.equals("B-") || donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      else if (this.bloodtype.equals("AB+")) {
+        canreceive = true;
+      }
+      else if (this.bloodtype.equals("AB-")) {
+        if(donor.bloodtype.equals("AB-") || donor.bloodtype.equals("A-") || donor.bloodtype.equals("B-") || donor.bloodtype.equals("O-")) {
+          canreceive = true;
+        }
+        else {
+          canreceive = false;
+        }
+
+
+      }
+      
+      else {
+          canreceive = false;
+        }
+        
+        return canreceive;
+
+
+    }
+         
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ import java.util.Scanner;
+ public class Runner {
+    public static void main(String[] args) {
+      
+      
+      Scanner input = new Scanner(System.in);
+
+
+        System.out.println("--- Blood Compatibility Checker ---");
+        System.out.println("Enter patient 1's name: ");
+        String p1Name = input.nextLine();
+        System.out.println(p1Name);
+        System.out.println("Enter patient 1's blood type (ex: AB+, O-): ");
+        String p1BloodType = input.nextLine();
+        System.out.println(p1BloodType);
+        Patient p1 = new Patient(p1BloodType);
+        
+        System.out.println("Enter patient 2's name: ");
+        String p2Name = input.nextLine();
+        System.out.println(p2Name);
+        System.out.println("Enter patient 2's blood type (ex: AB+, O-): ");
+        String p2BloodType = input.nextLine();
+        System.out.println(p2BloodType);
+        Patient p2 = new Patient(p2BloodType);
+        
+        System.out.println("");
+        if (p1.canDonateBloodTo(p2) == true) {
+          System.out.println(p1Name + " can donate blood to " + p2Name + ".");
+        }
+        else {
+          System.out.println(p1Name + " cannot donate blood to " + p2Name + ".");
+          
+        }
+        if (p1.canReceiveBloodFrom(p2) == true) {
+          System.out.println(p1Name + " can receive blood from " + p2Name + ".");
+        }
+        else {
+          System.out.println(p1Name + " cannot receive blood from " + p2Name + ".");
+          
+        }
+      
+    }
+}
+
+
+https://onecompiler.com/java/44qj2j47u
